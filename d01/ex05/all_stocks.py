@@ -20,17 +20,59 @@ def companies_n_stocks() -> tuple:
     return COMPANIES, STOCKS
 
 
-def find_stock_info(name):
-    companies, stocks = companies_n_stocks()
-    if name not in companies:
-        print("Unknown company")
+def find_in_companies(companies: dict, stocks: dict, name: str) -> bool:
+    for company, token in companies.items():
+        if name.lower() == company.lower():
+            print(company, "stock price is", stocks[token])
+            return True
+
+
+def ft_find_key_by_value(companies: dict, value: str) -> str:
+    for key, val in companies.items():
+        if val == value:
+            return key
+
+
+def find_in_tokens(companies: dict, stocks: dict, tk: str) -> bool:
+    tk = tk.upper()
+    if tk not in stocks:
+        return False
     else:
-        print(stocks[companies[name]])
+        company = ft_find_key_by_value(companies, tk)
+        print(tk, "is a ticker symbol for", company)
+        return True
+
+
+def get_info(args: list) -> None:
+    companies, stocks = companies_n_stocks()
+    for name in args:
+        if find_in_companies(companies, stocks, name):
+            pass
+        elif find_in_tokens(companies, stocks, name):
+            pass
+        else:
+            print(name, "is an unknown company or an unknown ticker symbol")
+
+
+def parse(string: str) -> list:
+    ls = string.split(',')
+    args = []
+    for arg in ls:
+        word = ''
+        for letter in arg:
+            if not letter.isspace():
+                word += letter
+        if word == '':
+            return []
+        else:
+            args.append(word)
+    return args
 
 
 def main():
     if len(sys.argv) == 2:
-        find_stock_info(sys.argv[1])
+        args = parse(sys.argv[1])
+        get_info(args)
 
 
 if __name__ == '__main__':

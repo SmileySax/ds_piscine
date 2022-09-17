@@ -20,12 +20,13 @@ def companies_n_stocks() -> tuple:
     return COMPANIES, STOCKS
 
 
-def find_stock_info(name):
+def find_stock_info(name: str):
     companies, stocks = companies_n_stocks()
-    if name not in companies:
-        print("Unknown company")
-    else:
-        print(stocks[companies[name]])
+    for company, token in companies.items():
+        if name.lower() == company.lower():
+            print(stocks[token])
+            return
+    print("Unknown company")
 
 
 def main():

@@ -30,7 +30,7 @@ def print_ticket_info(tk):
     companies, stocks = companies_n_stocks()
     tk = tk.upper()
     if tk not in stocks:
-        print("Unknown ticket")
+        print("Unknown ticker")
     else:
         company = ft_find_key_by_value(companies, tk)
         print(company, stocks[tk])
