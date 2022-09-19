@@ -1,5 +1,5 @@
-import sys
 from random import randint
+
 
 class Research:
     def __init__(self, path):
@@ -62,26 +62,14 @@ class Research:
         def predict_last(self):
             return self.data[-1]
 
+        def save_file(self, data, name, ext):
+            with open(name + '.' + ext, 'w') as file:
+                file.write(data)
 
-def main():
-    if len(sys.argv) == 2:
-        research = Research(sys.argv[1])
-        try:
-            res = research.file_reader()
-            print(res)
-        except Exception as error:
-            print("There is an error:", error)
-            return
-        analytics = research.Analytics(res)
-        sums = analytics.counts()
-        print(*sums)
-        percents = analytics.fractions(*sums)
-        print(*percents)
-        rnds = analytics.predict_random(3)
-        print(rnds)
-        last = analytics.predict_last()
-        print(last)
-
-
-if __name__ == '__main__':
-    main()
+        def counts_given(self, data) -> tuple:
+            tails = 0
+            heads = 0
+            for line in data:
+                heads += line[0]
+                tails += line[1]
+            return heads, tails
