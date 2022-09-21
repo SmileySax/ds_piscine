@@ -27,7 +27,10 @@ def main(fn: str, n_iter: int, n: int):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 4:
-        main(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
-    else:
+    try:
+        if len(sys.argv) == 4:
+            main(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+        else:
+            print('Expected format: ./benchmark.py {loop/reduce} #n_of_iterations #n_for_sum')
+    except ValueError:
         print('Expected format: ./benchmark.py {loop/reduce} #n_of_iterations #n_for_sum')

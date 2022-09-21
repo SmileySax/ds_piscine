@@ -42,7 +42,10 @@ def main(fn: str, n: int):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 3:
-        main(sys.argv[1], int(sys.argv[2]))
-    else:
-        print('Expected format: ./benchmark.py {loop/list_comprehension/map/filter} #n_of_iterations')
+    try:
+        if len(sys.argv) == 3:
+            main(sys.argv[1], int(sys.argv[2]))
+        else:
+            print('Expected format: ./benchmark.py {loop/reduce} #n_of_iterations #n_for_sum')
+    except ValueError:
+        print('Expected format: ./benchmark.py {loop/reduce} #n_of_iterations #n_for_sum')
